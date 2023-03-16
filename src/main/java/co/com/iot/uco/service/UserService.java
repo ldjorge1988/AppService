@@ -12,4 +12,6 @@ public interface UserService {
     void createUser(UserDTO userDTO);
 
     void deleteUser(Long identification);
+
+    void updateUser(UserDTO userDTO);
 }
