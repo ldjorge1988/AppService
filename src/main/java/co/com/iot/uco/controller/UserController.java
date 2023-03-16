@@ -4,9 +4,7 @@ import co.com.iot.uco.dto.UserDTO;
 import co.com.iot.uco.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,22 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity<List<UserDTO>> getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+
+    @GetMapping("/user/{identification}")
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long identification){
+        return ResponseEntity.ok().body(userService.getUserByIdentification(identification));
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<Void> createUser(UserDTO userDTO){
+        userService.createUser(userDTO);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/user/{identification}")
+    public ResponseEntity<Void> deleteUser(Long identification){
+        userService.deleteUser(identification);
+        return ResponseEntity.accepted().build();
     }
 }
