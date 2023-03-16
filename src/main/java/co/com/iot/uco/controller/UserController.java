@@ -31,9 +31,15 @@ public class UserController {
         return ResponseEntity.accepted().build();
     }
 
-    @PutMapping("/user/{identification}")
+    @DeleteMapping("/user/{identification}")
     public ResponseEntity<Void> deleteUser(Long identification){
         userService.deleteUser(identification);
+        return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/user")
+    public ResponseEntity<Void> updateUser(UserDTO userDTO){
+        userService.updateUser(userDTO);
         return ResponseEntity.accepted().build();
     }
 }

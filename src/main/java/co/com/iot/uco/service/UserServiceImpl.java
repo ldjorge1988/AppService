@@ -41,4 +41,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public void updateUser(UserDTO userDTO) {
+        User user = userRepository.findUserByIdentification(userDTO.getIdentification());
+        if(Objects.nonNull(user)){
+            user = userMapper.toEntoty(userDTO);
+            userRepository.save(user);
+        }
+    }
+
 }
