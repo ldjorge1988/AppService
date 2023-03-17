@@ -9,6 +9,8 @@ public interface UserService {
 
     UserDTO getUserByIdentification(Long identification);
 
+    UserDTO getUserByUserName(String userName);
+
     void createUser(UserDTO userDTO);
 
     void deleteUser(Long identification);
