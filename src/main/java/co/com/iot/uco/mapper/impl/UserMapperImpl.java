@@ -29,11 +29,10 @@ public class UserMapperImpl implements UserMapper {
         } else {
             UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
-            userDTO.setIdentification(user.getIdentification());
-            userDTO.setName(user.getName());
-            userDTO.setUserName(user.getUserName());
+            userDTO.setFullName(user.getFullName());
             userDTO.setPassword(user.getPassword());
             userDTO.setEmail(user.getEmail());
+            userDTO.setPhoneNumber(user.getPhoneNumber());
             return userDTO;
         }
     }

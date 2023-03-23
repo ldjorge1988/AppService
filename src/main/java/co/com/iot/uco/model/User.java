@@ -27,17 +27,18 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long identification;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "full_name")
+    private String fullName;
 
-    @Column(name = "user_name")
-    private String userName;
 
     private String password;
 
     private String email;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+
 
     @Override
     public boolean equals(Object o) {
