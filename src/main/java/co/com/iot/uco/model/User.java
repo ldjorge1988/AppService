@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -37,6 +38,14 @@ public class User implements Serializable {
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "feeder_id")
+    Feeder feeder;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Pet> pets;
+
 
 
 

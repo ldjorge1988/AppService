@@ -38,10 +38,6 @@ public class Feeder {
     @OneToMany(mappedBy = "feeder")
     private List<Pet> pet;
 
-
-
-
-
     
 
     
