@@ -30,6 +30,7 @@ public class Feeder {
     @Column(name = "id", nullable = false)
     private Long id;
     private String serial;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

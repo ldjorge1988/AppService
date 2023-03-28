@@ -3,7 +3,6 @@ package co.com.iot.uco.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,43 +10,40 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.iot.uco.dto.PetDTO;
-import co.com.iot.uco.service.PetSerivice;
+import co.com.iot.uco.dto.FeederDTO;
+import co.com.iot.uco.service.FeederService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class PetController {
+public class FeederController {
 
-    private final PetSerivice petService;
+    private final FeederService feederService;
 
-    @GetMapping("/pet")
-    public ResponseEntity<List<PetDTO>> getpets(){
-        return ResponseEntity.ok().body(petService.getPets());
+    @GetMapping("/feeder")
+    public ResponseEntity<List<FeederDTO>> getpets(){
+        return ResponseEntity.ok().body(feederService.getFeeders());
     }
 
  
 
-    @PostMapping("/pet")
-    public ResponseEntity<Void> createpet(PetDTO petDTO){
-        petService.createPet(petDTO);
+    @PostMapping("/feeder")
+    public ResponseEntity<Void> createpet(FeederDTO feederDto){
+        feederService.createFeeder(feederDto);
         return ResponseEntity.accepted().build();
     }
 
-    @DeleteMapping("/pet/{id}")
+    @DeleteMapping("/feeder/{id}")
     public ResponseEntity<Void> deletepet(long id){
-        petService.deletePet(id);
+        feederService.deleteFeeder(id);
         return ResponseEntity.accepted().build();
     }
 
-    @PutMapping("/pet")
-    public ResponseEntity<Void> updatepet(PetDTO petDTO){
-        petService.updatePet(petDTO);
+    @PutMapping("/feeder")
+    public ResponseEntity<Void> updatepet(FeederDTO feederDto){
+        feederService.updateFeeder(feederDto);
         return ResponseEntity.accepted().build();
     }
-
-    
-
     
 }

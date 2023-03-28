@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeederDto {
+public class FeederDTO {
     private Long id;
     private String serial;
+    private String name;
     
 }

@@ -1,9 +1,10 @@
-package co.com.iot.uco.service;
+package co.com.iot.uco.service.impl;
 
 import co.com.iot.uco.dto.UserDTO;
 import co.com.iot.uco.mapper.UserMapper;
 import co.com.iot.uco.model.User;
 import co.com.iot.uco.repository.UserRepository;
+import co.com.iot.uco.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService  {
 
     private final UserRepository userRepository;
 
@@ -30,13 +31,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDTO getUserByIdentification(Long identification) {
-        return userMapper.toDto(userRepository.findUserByIdentification(identification));
-    }
-
-    @Override
-    public UserDTO getUserByUserName(String userName) {
-        return userMapper.toDto(userRepository.findUserByUserName(userName));
+    public UserDTO getUserByEmail(String email) {
+        return userMapper.toDto(userRepository.findUserByEmail(email));
     }
 
     @Override
@@ -46,30 +42,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void deleteUser(Long identification) {
-        User user = userRepository.findUserByIdentification(identification);
+    public void deleteUser(Long id) {
+        User user = userRepository.findUserById(id);
         if(Objects.nonNull(user)){
             userRepository.delete(user);
         }
     }
 
-    /*@Override
+    @Override
     public void updateUser(UserDTO userDTO) {
-        User user = userRepository.findUserByIdentification(userDTO.getIdentification());
+        User user = userRepository.findUserById(userDTO.getId());
         if(Objects.nonNull(user)){
             user = userMapper.toEntoty(userDTO);
             userRepository.save(user);
         }
-    }*/
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
 
-    @Override
-    public void updateUser(UserDTO userDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
+
     }
-}
+
+    

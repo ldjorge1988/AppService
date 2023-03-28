@@ -20,10 +20,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @GetMapping("/user/{identification}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable Long identification){
-        return ResponseEntity.ok().body(userService.getUserByIdentification(identification));
-    }
+ 
 
     @PostMapping("/user")
     public ResponseEntity<Void> createUser(UserDTO userDTO){
@@ -32,8 +29,8 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{identification}")
-    public ResponseEntity<Void> deleteUser(Long identification){
-        userService.deleteUser(identification);
+    public ResponseEntity<Void> deleteUser(long id){
+        userService.deleteUser(id);
         return ResponseEntity.accepted().build();
     }
 
