@@ -35,9 +35,12 @@ public class Feeder {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "pet _id")
+    Pet pet;
     
-    @OneToMany(mappedBy = "feeder")
-    private List<Pet> pet;
+    
 
     
 

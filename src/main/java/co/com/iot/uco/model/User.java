@@ -36,16 +36,12 @@ public class User implements Serializable {
     private String password;
 
     private String email;
+    
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "feeder_id")
-    Feeder feeder;
     
-    @OneToMany(mappedBy = "user")
-    private List<Pet> pets;
-
+    
 
 
 

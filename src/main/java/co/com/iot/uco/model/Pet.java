@@ -30,9 +30,8 @@ public class Pet {
     private String name;
     private double weight;
 
-    @OneToOne
-    @JoinColumn(name = "feeder_id")
-    Feeder feeder;
+    
+   
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
