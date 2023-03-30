@@ -23,7 +23,7 @@ public class UserController {
  
 
     @PostMapping("/user")
-    public ResponseEntity<Void> createUser(UserDTO userDTO){
+    public ResponseEntity<Void> createUser(@RequestBody UserDTO userDTO){
         userService.createUser(userDTO);
         return ResponseEntity.accepted().build();
     }
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PutMapping("/user")
-    public ResponseEntity<Void> updateUser(UserDTO userDTO){
+    public ResponseEntity<Void> updateUser(@RequestBody UserDTO userDTO){
         userService.updateUser(userDTO);
         return ResponseEntity.accepted().build();
     }

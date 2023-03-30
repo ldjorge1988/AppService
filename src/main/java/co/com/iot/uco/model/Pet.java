@@ -33,9 +33,9 @@ public class Pet {
     
    
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private User user;
+    /*@ManyToOne
+    @JoinColumn(name = "usuario_id")*/
+    private String user_id;
 
 
 

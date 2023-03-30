@@ -34,11 +34,11 @@ public class Feeder {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private User user;
+    private String user_id;
 
     @OneToOne
     @JoinColumn(name = "pet _id")
-    Pet pet;
+    private String pet_id;
     
     
 

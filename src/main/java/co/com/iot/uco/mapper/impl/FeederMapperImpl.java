@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import co.com.iot.uco.dto.FeederDTO;
 import co.com.iot.uco.mapper.FeederMapper;
 import co.com.iot.uco.model.Feeder;
-
+import lombok.NoArgsConstructor;
+@Component
+@NoArgsConstructor
 public class FeederMapperImpl implements FeederMapper{
 
     @Override
@@ -16,6 +20,10 @@ public class FeederMapperImpl implements FeederMapper{
             return null;
         } else {
             Feeder feeder = new Feeder();
+            feeder.setName(dto.getName());
+            feeder.setSerial(dto.getSerial());
+            feeder.setUser_id(dto.getUser_id());
+            feeder.setPet_id(dto.getPet_id());
             return feeder;
         }
     }

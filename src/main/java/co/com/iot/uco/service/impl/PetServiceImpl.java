@@ -11,13 +11,15 @@ import co.com.iot.uco.mapper.PetMapper;
 import co.com.iot.uco.model.Pet;
 import co.com.iot.uco.repository.PetRepository;
 import co.com.iot.uco.service.PetSerivice;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class PetServiceImpl implements PetSerivice{
     @Autowired
-    PetRepository petRepository;
+    private final PetRepository petRepository;
     
-    PetMapper petMapper;
+    private final PetMapper petMapper;
 
     @Override
     public List<PetDTO> getPets() {

@@ -19,6 +19,10 @@ public class UserMapperImpl implements UserMapper {
             return null;
         } else {
             User user = new User();
+            user.setFullName(dto.getFullName());
+            user.setEmail(dto.getEmail());
+            user.setPassword(dto.getPassword());
+            user.setPhoneNumber(dto.getPhoneNumber());
             return user;
         }
     }

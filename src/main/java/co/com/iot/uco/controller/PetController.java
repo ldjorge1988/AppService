@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class PetController {
  
 
     @PostMapping("/pet")
-    public ResponseEntity<Void> createpet(PetDTO petDTO){
+    public ResponseEntity<Void> createpet(@RequestBody PetDTO petDTO){
         petService.createPet(petDTO);
         return ResponseEntity.accepted().build();
     }
@@ -42,7 +43,7 @@ public class PetController {
     }
 
     @PutMapping("/pet")
-    public ResponseEntity<Void> updatepet(PetDTO petDTO){
+    public ResponseEntity<Void> updatepet(@RequestBody PetDTO petDTO){
         petService.updatePet(petDTO);
         return ResponseEntity.accepted().build();
     }

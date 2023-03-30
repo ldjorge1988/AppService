@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import co.com.iot.uco.dto.PetDTO;
 import co.com.iot.uco.mapper.PetMapper;
 import co.com.iot.uco.model.Pet;
-
+import lombok.NoArgsConstructor;
+@Component
+@NoArgsConstructor
 public class PetMapperImpl implements PetMapper{
 
     @Override
@@ -16,6 +20,9 @@ public class PetMapperImpl implements PetMapper{
             return null;
         } else {
             Pet pet = new Pet();
+            pet.setName(dto.getName());
+            pet.setWeight(dto.getWeight());
+            pet.setUser_id (dto.getUser_id());
             return pet;
         }
     }
@@ -29,6 +36,7 @@ public class PetMapperImpl implements PetMapper{
             petDTO.setId(pet.getId());
             petDTO.setName(pet.getName());
             petDTO.setWeight(pet.getWeight());
+            petDTO.setUser_id("1");
             
             
             return petDTO;

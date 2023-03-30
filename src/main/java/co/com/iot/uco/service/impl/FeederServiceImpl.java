@@ -10,13 +10,15 @@ import co.com.iot.uco.mapper.FeederMapper;
 import co.com.iot.uco.model.Feeder;
 import co.com.iot.uco.repository.FeederRepository;
 import co.com.iot.uco.service.FeederService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class FeederServiceImpl implements FeederService {
 
-    FeederRepository feederRepository;
+    private final FeederRepository feederRepository;
 
-    FeederMapper feederMapper;
+    private final FeederMapper feederMapper;
 
     @Override
     public List<FeederDTO> getFeeders() {

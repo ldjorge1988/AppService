@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     private final UserMapper userMapper;
 
-    private PasswordEncoder bcryptEncoder;
+    //private PasswordEncoder bcryptEncoder;
 
     @Override
     public List<UserDTO> getUsers() {
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     @Override
     public void createUser(UserDTO userDTO) {
-        userDTO.setPassword(bcryptEncoder.encode(userDTO.getPassword()));
+        //userDTO.setPassword(bcryptEncoder.encode(userDTO.getPassword()));
         userRepository.save(userMapper.toEntoty(userDTO));
     }
 
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return null;
     }
 
