@@ -28,22 +28,21 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-
     @Column(name = "full_name")
     private String fullName;
-
 
     private String password;
 
     private String email;
-    
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    
-    
+    @OneToMany(mappedBy = "user")
+    private List<Pet> pets;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<Feeder> feeders;
 
     @Override
     public boolean equals(Object o) {

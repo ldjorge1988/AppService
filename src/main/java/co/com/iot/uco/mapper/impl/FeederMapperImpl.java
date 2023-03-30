@@ -1,18 +1,24 @@
 package co.com.iot.uco.mapper.impl;
 
+import co.com.iot.uco.dto.FeederDTO;
+import co.com.iot.uco.mapper.FeederMapper;
+import co.com.iot.uco.mapper.PetMapper;
+import co.com.iot.uco.mapper.UserMapper;
+import co.com.iot.uco.model.Feeder;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-import co.com.iot.uco.dto.FeederDTO;
-import co.com.iot.uco.mapper.FeederMapper;
-import co.com.iot.uco.model.Feeder;
-import lombok.NoArgsConstructor;
 @Component
-@NoArgsConstructor
-public class FeederMapperImpl implements FeederMapper{
+@RequiredArgsConstructor
+public class FeederMapperImpl implements FeederMapper {
+
+    private final UserMapper userMapper;
+
+    private final PetMapper petMapper;
 
     @Override
     public Feeder toEntoty(FeederDTO dto) {
@@ -22,8 +28,8 @@ public class FeederMapperImpl implements FeederMapper{
             Feeder feeder = new Feeder();
             feeder.setName(dto.getName());
             feeder.setSerial(dto.getSerial());
-            feeder.setUser_id(dto.getUser_id());
-            feeder.setPet_id(dto.getPet_id());
+            feeder.setUser(userMapper.toEntoty(dto.getUser()));
+            feeder.setPet(petMapper.toEntoty(dto.getPet()));
             return feeder;
         }
     }
@@ -37,7 +43,8 @@ public class FeederMapperImpl implements FeederMapper{
             feederDTO.setId(feeder.getId());
             feederDTO.setName(feeder.getName());
             feederDTO.setSerial(feeder.getSerial());
-            
+            feederDTO.setUser(userMapper.toDto(feeder.getUser()));
+            feederDTO.setPet(petMapper.toDto(feeder.getPet()));
             return feederDTO;
         }
     }
@@ -75,5 +82,5 @@ public class FeederMapperImpl implements FeederMapper{
             return list;
         }
     }
-    
+
 }

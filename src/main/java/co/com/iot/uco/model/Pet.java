@@ -1,14 +1,6 @@
 package co.com.iot.uco.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -27,19 +19,17 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
     private String name;
+
     private double weight;
 
-    
-   
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    /*@ManyToOne
-    @JoinColumn(name = "usuario_id")*/
-    private String user_id;
-
-
-
-
-
+    @OneToOne
+    @JoinColumn(name = "feeder_id")
+    private Feeder feeder;
 
 }

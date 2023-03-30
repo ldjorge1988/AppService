@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import co.com.iot.uco.mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import co.com.iot.uco.dto.PetDTO;
@@ -11,8 +13,11 @@ import co.com.iot.uco.mapper.PetMapper;
 import co.com.iot.uco.model.Pet;
 import lombok.NoArgsConstructor;
 @Component
-@NoArgsConstructor
+
+@RequiredArgsConstructor
 public class PetMapperImpl implements PetMapper{
+
+    private final UserMapper userMapper;
 
     @Override
     public Pet toEntoty(PetDTO dto) {
@@ -22,7 +27,7 @@ public class PetMapperImpl implements PetMapper{
             Pet pet = new Pet();
             pet.setName(dto.getName());
             pet.setWeight(dto.getWeight());
-            pet.setUser_id (dto.getUser_id());
+            pet.setUser(userMapper.toEntoty(dto.getUser()));
             return pet;
         }
     }
@@ -36,8 +41,7 @@ public class PetMapperImpl implements PetMapper{
             petDTO.setId(pet.getId());
             petDTO.setName(pet.getName());
             petDTO.setWeight(pet.getWeight());
-            petDTO.setUser_id("1");
-            
+            petDTO.setUser(userMapper.toDto(pet.getUser()));
             
             return petDTO;
         }
