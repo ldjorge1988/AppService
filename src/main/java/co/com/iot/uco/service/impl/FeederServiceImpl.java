@@ -36,8 +36,6 @@ public class FeederServiceImpl implements FeederService {
         if(Objects.nonNull(feeder)){
             feederRepository.delete(feeder);
         }
-        
-        
     }
 
     @Override

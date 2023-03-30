@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @ToString
@@ -23,6 +25,9 @@ public class Feeder {
     private String serial;
 
     private String name;
+
+    @Column(name = "schedule_pet")
+    private String schedulePet;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

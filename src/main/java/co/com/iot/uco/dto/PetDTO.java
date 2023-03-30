@@ -15,4 +15,5 @@ public class PetDTO {
     private double weight;
     private UserDTO user;
     private FeederDTO feeder;
+    private String species;
 }

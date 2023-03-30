@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,13 +16,13 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService, UserDetailsService  {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
 
-    //private PasswordEncoder bcryptEncoder;
+    private final EncodeServiceImpl bcryptEncoder;
 
     @Override
     public List<UserDTO> getUsers() {
@@ -37,22 +36,26 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     @Override
     public void createUser(UserDTO userDTO) {
-        //userDTO.setPassword(bcryptEncoder.encode(userDTO.getPassword()));
-        userRepository.save(userMapper.toEntoty(userDTO));
+        User user = userRepository.findUserByEmail(userDTO.getEmail());
+        if (Objects.isNull(user)) {
+            userDTO.setPassword(bcryptEncoder.encodeData(userDTO.getPassword()));
+            userRepository.save(userMapper.toEntoty(userDTO));
+        }
     }
 
     @Override
-    public void deleteUser(Long id) {
-        User user = userRepository.findUserById(id);
-        if(Objects.nonNull(user)){
+    public void deleteUser(String email) {
+        User user = userRepository.findUserByEmail(email);
+        if (Objects.nonNull(user)) {
             userRepository.delete(user);
         }
     }
 
     @Override
     public void updateUser(UserDTO userDTO) {
-        User user = userRepository.findUserById(userDTO.getId());
-        if(Objects.nonNull(user)){
+        User user = userRepository.findUserByEmail(userDTO.getEmail());
+        if (Objects.nonNull(user)) {
+            userDTO.setId(user.getId());
             user = userMapper.toEntoty(userDTO);
             userRepository.save(user);
         }
@@ -64,6 +67,6 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     }
 
 
-    }
+}
 
     

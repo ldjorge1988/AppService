@@ -1,22 +1,20 @@
 package co.com.iot.uco.mapper.impl;
 
 import co.com.iot.uco.dto.FeederDTO;
+import co.com.iot.uco.dto.UserDTO;
 import co.com.iot.uco.mapper.FeederMapper;
 import co.com.iot.uco.mapper.PetMapper;
-import co.com.iot.uco.mapper.UserMapper;
 import co.com.iot.uco.model.Feeder;
+import co.com.iot.uco.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class FeederMapperImpl implements FeederMapper {
-
-    private final UserMapper userMapper;
 
     private final PetMapper petMapper;
 
@@ -28,10 +26,20 @@ public class FeederMapperImpl implements FeederMapper {
             Feeder feeder = new Feeder();
             feeder.setName(dto.getName());
             feeder.setSerial(dto.getSerial());
-            feeder.setUser(userMapper.toEntoty(dto.getUser()));
+            feeder.setUser(buildUser(dto.getUser()));
             feeder.setPet(petMapper.toEntoty(dto.getPet()));
+            feeder.setSchedulePet(dto.getSchedulePet());
             return feeder;
         }
+    }
+
+    private User buildUser(UserDTO user) {
+        return User.builder()
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .phoneNumber(user.getPhoneNumber())
+                .build();
     }
 
     @Override
@@ -43,10 +51,20 @@ public class FeederMapperImpl implements FeederMapper {
             feederDTO.setId(feeder.getId());
             feederDTO.setName(feeder.getName());
             feederDTO.setSerial(feeder.getSerial());
-            feederDTO.setUser(userMapper.toDto(feeder.getUser()));
+            feederDTO.setUser(buildUserDTO(feeder.getUser()));
             feederDTO.setPet(petMapper.toDto(feeder.getPet()));
+            feederDTO.setSchedulePet(feeder.getSchedulePet());
             return feederDTO;
         }
+    }
+
+    private UserDTO buildUserDTO(User user) {
+        return UserDTO.builder()
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .phoneNumber(user.getPhoneNumber())
+                .build();
     }
 
     @Override
@@ -54,11 +72,9 @@ public class FeederMapperImpl implements FeederMapper {
         if (dto == null) {
             return null;
         } else {
-            List<Feeder> list = new ArrayList(dto.size());
-            Iterator var3 = dto.iterator();
+            List<Feeder> list = new ArrayList<>(dto.size());
 
-            while (var3.hasNext()) {
-                FeederDTO feederDto = (FeederDTO) var3.next();
+            for (FeederDTO feederDto : dto) {
                 list.add(this.toEntoty(feederDto));
             }
 
@@ -71,12 +87,10 @@ public class FeederMapperImpl implements FeederMapper {
         if (feeder == null) {
             return null;
         } else {
-            List<FeederDTO> list = new ArrayList(feeder.size());
-            Iterator var3 = feeder.iterator();
+            List<FeederDTO> list = new ArrayList<>(feeder.size());
 
-            while (var3.hasNext()) {
-                Feeder feeder1 = (Feeder) var3.next();
-                list.add(this.toDto(feeder1));
+            for (Feeder feederIn : feeder) {
+                list.add(this.toDto(feederIn));
             }
 
             return list;
