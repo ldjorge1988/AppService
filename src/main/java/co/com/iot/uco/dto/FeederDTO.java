@@ -13,10 +13,6 @@ public class FeederDTO {
     private Long id;
     private String serial;
     private String name;
-    private String pet_id;
-    private String user_id;
-
-
-
-    
+    private PetDTO pet;
+    private UserDTO user;
 }

@@ -13,7 +13,6 @@ public class PetDTO {
     private long id;
     private String name;
     private double weight;
-    private String user_id;
-
-    
+    private UserDTO user;
+    private FeederDTO feeder;
 }
