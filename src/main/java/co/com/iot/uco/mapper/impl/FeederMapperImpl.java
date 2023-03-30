@@ -35,6 +35,7 @@ public class FeederMapperImpl implements FeederMapper {
 
     private User buildUser(UserDTO user) {
         return User.builder()
+                .id(user.getId())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
                 .password(user.getPassword())
