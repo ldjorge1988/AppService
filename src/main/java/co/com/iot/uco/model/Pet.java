@@ -15,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "pet")
 public class Pet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,8 +29,6 @@ public class Pet {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "feeder_id")
-    private Feeder feeder;
+    private String species;
 
 }

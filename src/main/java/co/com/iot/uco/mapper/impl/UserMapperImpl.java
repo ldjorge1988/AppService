@@ -5,33 +5,41 @@ import co.com.iot.uco.mapper.FeederMapper;
 import co.com.iot.uco.mapper.PetMapper;
 import co.com.iot.uco.mapper.UserMapper;
 import co.com.iot.uco.model.User;
-import lombok.NoArgsConstructor;
+import co.com.iot.uco.service.impl.EncodeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class UserMapperImpl implements UserMapper {
 
-    private PetMapper petMapper;
+    private final PetMapper petMapper;
 
-    private FeederMapper feederMapper;
+    private final FeederMapper feederMapper;
+
+    private final EncodeServiceImpl bcryptEncoder;
 
     public User toEntoty(UserDTO dto) {
         if (dto == null) {
             return null;
         } else {
             User user = new User();
+            user.setId(dto.getId());
             user.setFullName(dto.getFullName());
             user.setEmail(dto.getEmail());
-            user.setPassword(dto.getPassword());
+            user.setPassword(bcryptEncoder.encodeData(dto.getPassword()));
             user.setPhoneNumber(dto.getPhoneNumber());
-            user.setPets(petMapper.toEntoties(dto.getPets()));
-            user.setFeeders(feederMapper.toEntoties(dto.getFeeders()));
+
+            if (!CollectionUtils.isEmpty(dto.getPets()))
+                user.setPets(petMapper.toEntoties(dto.getPets()));
+
+            if (!CollectionUtils.isEmpty(dto.getFeeders()))
+                user.setFeeders(feederMapper.toEntoties(dto.getFeeders()));
+
             return user;
         }
     }
@@ -46,8 +54,13 @@ public class UserMapperImpl implements UserMapper {
             userDTO.setPassword(user.getPassword());
             userDTO.setEmail(user.getEmail());
             userDTO.setPhoneNumber(user.getPhoneNumber());
-            userDTO.setPets(petMapper.toDtos(user.getPets()));
-            userDTO.setFeeders(feederMapper.toDtos(user.getFeeders()));
+
+            if (!CollectionUtils.isEmpty(user.getPets()))
+                userDTO.setPets(petMapper.toDtos(user.getPets()));
+
+            if (!CollectionUtils.isEmpty(user.getFeeders()))
+                userDTO.setFeeders(feederMapper.toDtos(user.getFeeders()));
+
             return userDTO;
         }
     }
@@ -56,11 +69,9 @@ public class UserMapperImpl implements UserMapper {
         if (dto == null) {
             return null;
         } else {
-            List<User> list = new ArrayList(dto.size());
-            Iterator var3 = dto.iterator();
+            List<User> list = new ArrayList<>(dto.size());
 
-            while (var3.hasNext()) {
-                UserDTO userDTO = (UserDTO) var3.next();
+            for (UserDTO userDTO : dto) {
                 list.add(this.toEntoty(userDTO));
             }
 
@@ -72,12 +83,10 @@ public class UserMapperImpl implements UserMapper {
         if (user == null) {
             return null;
         } else {
-            List<UserDTO> list = new ArrayList(user.size());
-            Iterator var3 = user.iterator();
+            List<UserDTO> list = new ArrayList<>(user.size());
 
-            while (var3.hasNext()) {
-                User user1 = (User) var3.next();
-                list.add(this.toDto(user1));
+            for (User userIn : user) {
+                list.add(this.toDto(userIn));
             }
 
             return list;

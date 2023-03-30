@@ -1,23 +1,19 @@
 package co.com.iot.uco.mapper.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import co.com.iot.uco.mapper.UserMapper;
+import co.com.iot.uco.dto.PetDTO;
+import co.com.iot.uco.dto.UserDTO;
+import co.com.iot.uco.mapper.PetMapper;
+import co.com.iot.uco.model.Pet;
+import co.com.iot.uco.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import co.com.iot.uco.dto.PetDTO;
-import co.com.iot.uco.mapper.PetMapper;
-import co.com.iot.uco.model.Pet;
-import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
-
 @RequiredArgsConstructor
-public class PetMapperImpl implements PetMapper{
-
-    private final UserMapper userMapper;
+public class PetMapperImpl implements PetMapper {
 
     @Override
     public Pet toEntoty(PetDTO dto) {
@@ -27,9 +23,20 @@ public class PetMapperImpl implements PetMapper{
             Pet pet = new Pet();
             pet.setName(dto.getName());
             pet.setWeight(dto.getWeight());
-            pet.setUser(userMapper.toEntoty(dto.getUser()));
+            pet.setUser(buildUser(dto.getUser()));
+            pet.setSpecies(dto.getSpecies());
             return pet;
         }
+    }
+
+    private User buildUser(UserDTO userDTO) {
+        return User.builder()
+                .id(userDTO.getId())
+                .fullName(userDTO.getFullName())
+                .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
+                .phoneNumber(userDTO.getPhoneNumber())
+                .build();
     }
 
     @Override
@@ -41,10 +48,20 @@ public class PetMapperImpl implements PetMapper{
             petDTO.setId(pet.getId());
             petDTO.setName(pet.getName());
             petDTO.setWeight(pet.getWeight());
-            petDTO.setUser(userMapper.toDto(pet.getUser()));
-            
+            petDTO.setUser(buildUserDTO(pet.getUser()));
+            petDTO.setSpecies(pet.getSpecies());
             return petDTO;
         }
+    }
+
+    private UserDTO buildUserDTO(User user) {
+        return UserDTO.builder()
+                .id(user.getId())
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .phoneNumber(user.getPhoneNumber())
+                .build();
     }
 
     @Override
@@ -52,11 +69,9 @@ public class PetMapperImpl implements PetMapper{
         if (dto == null) {
             return null;
         } else {
-            List<Pet> list = new ArrayList(dto.size());
-            Iterator var3 = dto.iterator();
+            List<Pet> list = new ArrayList<>(dto.size());
 
-            while (var3.hasNext()) {
-                PetDTO petDTO = (PetDTO) var3.next();
+            for (PetDTO petDTO : dto) {
                 list.add(this.toEntoty(petDTO));
             }
 
@@ -69,16 +84,14 @@ public class PetMapperImpl implements PetMapper{
         if (pet == null) {
             return null;
         } else {
-            List<PetDTO> list = new ArrayList(pet.size());
-            Iterator var3 = pet.iterator();
+            List<PetDTO> list = new ArrayList<>(pet.size());
 
-            while (var3.hasNext()) {
-                Pet pet1 = (Pet) var3.next();
+            for (Pet pet1 : pet) {
                 list.add(this.toDto(pet1));
             }
 
             return list;
         }
     }
-    
+
 }
