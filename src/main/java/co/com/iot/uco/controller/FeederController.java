@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import co.com.iot.uco.dto.FeederDTO;
 import co.com.iot.uco.service.FeederService;
@@ -47,5 +48,10 @@ public class FeederController {
         feederService.updateFeeder(feederDto);
         return ResponseEntity.accepted().build();
     }
-    
+
+    @GetMapping("/feeder/{serial}")
+    public ResponseEntity<FeederDTO> getBySerial(@PathVariable String serial){
+        return ResponseEntity.ok(feederService.getFeederBySerial(serial));
+    }
+
 }
