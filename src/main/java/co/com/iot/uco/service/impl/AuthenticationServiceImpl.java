@@ -14,13 +14,13 @@ import lombok.RequiredArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AuthenticationServiceImpl {
-
+    
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final EncodeServiceImpl bcryptEncoder;
 
     
-    @Autowired
+    
     public UserAuthDTO login(LoginDTO login ){
         UserDTO userDTO= userMapper.toDto(userRepository.findUserByEmail(login.getEmail()));
         if(userDTO != null && userDTO.getPassword().equals(bcryptEncoder.encodeData(login.getPassword()))){

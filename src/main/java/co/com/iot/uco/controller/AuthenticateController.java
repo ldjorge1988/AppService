@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.iot.uco.dto.AuthenticateDTO;
 import co.com.iot.uco.dto.LoginDTO;
+import co.com.iot.uco.dto.UserAuthDTO;
 import co.com.iot.uco.dto.UserDTO;
 import co.com.iot.uco.service.impl.AuthenticationServiceImpl;
 import co.com.iot.uco.repository.UserRepository;
@@ -22,12 +23,12 @@ public class AuthenticateController {
 
     private final AuthenticationServiceImpl authenticationServiceImpl;
     @PostMapping("/login")
-    public ResponseEntity<AuthenticateDTO> createpet(@RequestBody LoginDTO login){
+    public ResponseEntity<UserAuthDTO> createpet(@RequestBody LoginDTO login){
 
        
 
-        authenticationServiceImpl.login(login);
-        ResponseEntity.accepted().build();
+        
+       return ResponseEntity.ok(authenticationServiceImpl.login(login));
     }
 
 
