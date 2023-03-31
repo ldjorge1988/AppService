@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 public class EncodeServiceImpl {
 
     private final PasswordEncoder bcryptEncoder;
+    
+    
 
     public String encodeData(String data){
         return bcryptEncoder.encode(data);
     }
+
+    
 }

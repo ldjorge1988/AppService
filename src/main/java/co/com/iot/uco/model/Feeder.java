@@ -33,8 +33,6 @@ public class Feeder {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
+    
 
 }
