@@ -3,6 +3,7 @@ package co.com.iot.uco.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.iot.uco.dto.FeederDTO;
 import co.com.iot.uco.service.FeederService;
 import lombok.RequiredArgsConstructor;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor

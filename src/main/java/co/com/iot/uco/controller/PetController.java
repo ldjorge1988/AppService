@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.iot.uco.dto.PetDTO;
 import co.com.iot.uco.service.PetSerivice;
 import lombok.RequiredArgsConstructor;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class PetController {
 
     private final PetSerivice petService;
-
+    
     @GetMapping("/pet")
     public ResponseEntity<List<PetDTO>> getpets(){
         return ResponseEntity.ok().body(petService.getPets());

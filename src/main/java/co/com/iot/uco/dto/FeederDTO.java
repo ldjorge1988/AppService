@@ -1,5 +1,7 @@
 package co.com.iot.uco.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +17,7 @@ public class FeederDTO {
     private Long id;
     private String serial;
     private String name;
-    private PetDTO pet;
     private UserDTO user;
     @JsonProperty("scheduleList")
-    private String schedulePet;
+    private List<String> schedulePet;
 }

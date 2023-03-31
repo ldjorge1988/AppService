@@ -27,8 +27,7 @@ public class FeederMapperImpl implements FeederMapper {
             feeder.setName(dto.getName());
             feeder.setSerial(dto.getSerial());
             feeder.setUser(buildUser(dto.getUser()));
-            feeder.setPet(petMapper.toEntoty(dto.getPet()));
-            feeder.setSchedulePet(dto.getSchedulePet());
+            feeder.setSchedulePet(dto.getSchedulePet().get(0));
             return feeder;
         }
     }
@@ -53,8 +52,7 @@ public class FeederMapperImpl implements FeederMapper {
             feederDTO.setName(feeder.getName());
             feederDTO.setSerial(feeder.getSerial());
             feederDTO.setUser(buildUserDTO(feeder.getUser()));
-            feederDTO.setPet(petMapper.toDto(feeder.getPet()));
-            feederDTO.setSchedulePet(feeder.getSchedulePet());
+            feederDTO.setSchedulePet(List.of(feeder.getSchedulePet()));
             return feederDTO;
         }
     }
