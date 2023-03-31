@@ -7,5 +7,6 @@ import co.com.iot.uco.model.Feeder;
 @Repository
 public interface FeederRepository extends JpaRepository<Feeder, Long> {
     Feeder findFeederById(long id);
-    
+
+    Feeder findFeederBySerial(String serial);
 }

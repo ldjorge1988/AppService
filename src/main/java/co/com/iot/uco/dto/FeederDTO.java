@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FeederDTO {
+
     @JsonProperty("petId")
     private Long id;
     private String serial;

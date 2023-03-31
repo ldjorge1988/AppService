@@ -12,5 +12,7 @@ public interface FeederService {
     void deleteFeeder(Long id);
 
     void updateFeeder(FeederDTO FeederDto);
+
+    FeederDTO getFeederBySerial(String serial);
     
 }
