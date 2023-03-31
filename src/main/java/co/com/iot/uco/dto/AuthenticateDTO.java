@@ -1,8 +1,13 @@
 package co.com.iot.uco.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class AuthenticateDTO {
-    private UserDTO user;
-    private String token="11231qeq";
+    private UserAuthDTO user;
+    private String token;
 
     
 }

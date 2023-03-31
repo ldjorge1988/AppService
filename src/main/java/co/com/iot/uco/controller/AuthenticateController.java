@@ -23,11 +23,8 @@ public class AuthenticateController {
 
     private final AuthenticationServiceImpl authenticationServiceImpl;
     @PostMapping("/login")
-    public ResponseEntity<UserAuthDTO> createpet(@RequestBody LoginDTO login){
+    public ResponseEntity<AuthenticateDTO> createpet(@RequestBody LoginDTO login){
 
-       
-
-        
        return ResponseEntity.ok(authenticationServiceImpl.login(login));
     }
 
